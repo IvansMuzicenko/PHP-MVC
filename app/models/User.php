@@ -48,7 +48,7 @@ class User
         $this->db->query('SELECT * FROM users WHERE email = :email');
         $this->db->bind(':email', $email);
 
-        if ($this->db->rowCount > 0) {
+        if ($this->db->rowCount() > 0) {
             return true;
         } else {
             return false;

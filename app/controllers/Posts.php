@@ -117,4 +117,33 @@ class Posts extends Controller
 
         $this->view('posts/update', $data);
     }
+
+    public function delete($id)
+    {
+        $post = $this->postModel->findPostById($id);
+
+        if (!isLoggedIn()) {
+            header("Location: " . URLROOT . "/posts");
+        } elseif ($post->user_id != $_SESSION['user_id']) {
+            header("Location: " . URLROOT . "/posts");
+        }
+
+        $data = [
+            'post' => $post,
+            'title' => '',
+            'body' => '',
+            'titleError' => '',
+            'bodyError' => ''
+        ];
+
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            if ($this->postModel->deletePost($id)) {
+                header("Location: " . URLROOT . "/posts");
+            } else {
+                die('Post delete failed!');
+            }
+        }
+    }
 }

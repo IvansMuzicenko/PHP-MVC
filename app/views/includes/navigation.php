@@ -4,7 +4,7 @@
             <a href="<?php echo URLROOT; ?>/pages/index">Home</a>
         </li>
         <li>
-            <a href="<?php echo URLROOT; ?>/pages/posts">Posts</a>
+            <a href="<?php echo URLROOT; ?>/posts">Posts</a>
         </li>
         <li class="btn-login">
             <?php if (isset($_SESSION['user_id'])) : ?>
